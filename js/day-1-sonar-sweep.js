@@ -1,8 +1,8 @@
+let fileSystem = require('fs');
+let inputFile = fileSystem.readFileSync("../day-1-input.txt", "utf-8");
+let depths = inputFile.split("\n");
 // ---------- Part 1 ----------
 (function () {
-    let fileSystem = require('fs');
-    let inputFile = fileSystem.readFileSync("../day-1-input.txt", "utf-8");
-    let depths = inputFile.split("\n");
     let count = 0;
     for (let i = 0; i < depths.length; i++) {
         if (!depths[i + 1]) {
@@ -16,9 +16,6 @@
 })();
 // ---------- Part 2 ----------
 (function () {
-    let fileSystem = require('fs');
-    let inputFile = fileSystem.readFileSync("../day-1-input.txt", "utf-8");
-    let depths = inputFile.split("\n");
     let count = 0;
     for (let i = 0; i < depths.length; i++) {
         if (!depths[i + 3]) {

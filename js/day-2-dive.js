@@ -1,8 +1,8 @@
+let fileSystem = require('fs');
+let inputFile = fileSystem.readFileSync("../day-2-input.txt", "utf-8");
+let movements = inputFile.split("\n");
 // ---------- Part 1 ----------
 (function () {
-    let fileSystem = require('fs');
-    let inputFile = fileSystem.readFileSync("../day-2-input.txt", "utf-8");
-    let movements = inputFile.split("\n");
     let hPosition = 0;
     let depth = 0;
     for (let i = 0; i < movements.length - 1; i++) {
@@ -18,9 +18,6 @@
 })();
 // ---------- Part 2 ----------
 (function () {
-    let fileSystem = require('fs');
-    let inputFile = fileSystem.readFileSync("../day-2-input.txt", "utf-8");
-    let movements = inputFile.split("\n");
     let hPosition = 0;
     let aim = 0;
     let depth = 0;
