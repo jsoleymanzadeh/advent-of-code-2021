@@ -11,9 +11,9 @@ const diagCodes = inputFile.split("\n");
     for (let i = 0; i < diagCodes.length; i++) {
         for (let j = 0; j < diagCodes[0].length; j++) {
             if (Number(diagCodes[i].charAt(j)) == 1) {
-                bitCounts[j] += 1;
+                bitCounts[j]++;
             } else {
-                bitCounts[j] -= 1;
+                bitCounts[j]--;
             }
         }
     }
@@ -47,9 +47,9 @@ const diagCodes = inputFile.split("\n");
         // set mostCommonResult based on the bit at one position of all codes
         for (let i = 0; i < input.length; i++) {
             if (Number(input[i].charAt(position)) === 1) {
-                mostCommonResult += 1;
+                mostCommonResult++;
             } else {
-                mostCommonResult -= 1;
+                mostCommonResult--;
             }
         }
         // set mostCommonResult to be 0 if negative and 1 if positive or zero
@@ -65,9 +65,9 @@ const diagCodes = inputFile.split("\n");
         // set leastCommonResult based on the bit at one position of all codes
         for (let i = 0; i < input.length; i++) {
             if (Number(input[i].charAt(position)) === 1) {
-                leastCommonResult += 1;
+                leastCommonResult++;
             } else {
-                leastCommonResult -= 1;
+                leastCommonResult--;
             }
         }
         // set leastCommonResult to be 1 if negative and 0 if positive or zero
