@@ -4,10 +4,8 @@ let depths = inputFile.split("\n");
 // ---------- Part 1 ----------
 (function () {
     let count = 0;
-    for (let i = 0; i < depths.length; i++) {
-        if (!depths[i + 1]) {
-            break;
-        }
+    // compare each value in the array with the value in the next index and increment count when the next value is higher
+    for (let i = 0; i < depths.length - 1; i++) {
         if (depths[i + 1] > depths[i]) {
             count++;
         }
@@ -17,10 +15,8 @@ let depths = inputFile.split("\n");
 // ---------- Part 2 ----------
 (function () {
     let count = 0;
-    for (let i = 0; i < depths.length; i++) {
-        if (!depths[i + 3]) {
-            break;
-        }
+    // compare the sum of 3 consecutive values in the array with the sum of 3 consecutive indices starting with the next index and increment count when the next sum is higher
+    for (let i = 0; i < depths.length - 1; i++) {
         if (Number(depths[i + 1]) + Number(depths[i + 2]) + Number(depths[i + 3]) > Number(depths[i]) + Number(depths[i + 1]) + Number(depths[i + 2])) {
             count++;
         }
