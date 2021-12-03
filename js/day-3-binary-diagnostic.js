@@ -26,7 +26,7 @@ const diagCodes = inputFile.split("\n");
         }
     }
     // converts array of bits into a binary string, then into an integer for multiplication
-    let mostCommon = parseInt(bitCounts.join("").toString(), 2);
+    let gammaRate = parseInt(bitCounts.join("").toString(), 2);
     // sets bit count array values to the least common bits in each position (0 if positive and 1 if negative)
     for (let i = 0; i < bitCounts.length; i++) {
         if (bitCounts[i] === 0) {
@@ -36,8 +36,8 @@ const diagCodes = inputFile.split("\n");
         }
     }
     // converts array of bits into a binary string, then into an integer for multiplication
-    let leastCommon = parseInt(bitCounts.join("").toString(), 2);
-    console.log(mostCommon * leastCommon);
+    let epsilonRate = parseInt(bitCounts.join("").toString(), 2);
+    console.log(gammaRate * epsilonRate);
 })();
 // ---------- Part 2 ----------
 (function () {
