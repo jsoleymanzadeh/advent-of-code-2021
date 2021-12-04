@@ -3,6 +3,7 @@ let inputFile = fileSystem.readFileSync("../day-4-input.txt", "utf-8");
 const bingoBoards = inputFile.split("\n");
 let drawnNumbers = bingoBoards[0].split(",");
 bingoBoards.shift();
+let allBoards = [];
 // ---------- Part 1 ----------
 (function () {
     // converts a bingo board into a matrix
@@ -50,7 +51,6 @@ bingoBoards.shift();
     }
 
     // convert all lines in the input file into an array of matrices to represent all bingo boards
-    let allBoards = [];
     for (let i = 0; i < bingoBoards.length; i += 5) {
         allBoards.push(addBoard(bingoBoards, i));
     }
@@ -76,6 +76,70 @@ bingoBoards.shift();
     for (let i = 0; i < drawnNumbers.length; i++) {
         winningDraw = pickNumber(i);
         if (winnerFound) {
+            break;
+        }
+    }
+    console.log(winningDraw * unmarkedSum);
+
+})();
+// ---------- Part 2 ----------
+(function () {
+    // pick a number from drawnNumbers list and mark it off on all bingo boards that include it
+    // when a bingo board has won, eliminate it from boardWinTracker unless it is the last board
+    // when a final board has been found, stop the function
+    function playGame(iteration) {
+        for (let i = 0; i < allBoards.length; i++) {
+            for (let j = 0; j < 5; j++) {
+                for (let k = 0; k < 5; k++) {
+                    if (drawnNumbers[iteration] === allBoards[i][j][k]) {
+                        numberWinTracker[i][j][k] = 1;
+                    }
+                    if ((numberWinTracker[i][j][0] === 1 && numberWinTracker[i][j][1] === 1 && numberWinTracker[i][j][2] === 1 && numberWinTracker[i][j][3] === 1 && numberWinTracker[i][j][4] === 1) || (numberWinTracker[i][0][k] === 1 && numberWinTracker[i][1][k] === 1 && numberWinTracker[i][2][k] === 1 && numberWinTracker[i][3][k] === 1 && numberWinTracker[i][4][k] === 1)) {
+                        // when a winning board is found, remove the board from the boardWinTracker unless it is the last board
+                        // add all unpicked numbers on the last winning board and record that the last board has been found
+                        if ((boardWinTracker.length > 1) && (boardWinTracker.includes(i))) {
+                            boardWinTracker.splice(boardWinTracker.indexOf(i), 1);
+                        } else if (boardWinTracker.length === 1 && boardWinTracker.indexOf(i) === 0) {
+                            lastWinnerFound = true;
+                            for (let a = 0; a < 5; a++) {
+                                for (let b = 0; b < 5; b++) {
+                                    if (numberWinTracker[i][a][b] === 0) {
+                                        unmarkedSum += allBoards[i][a][b];
+                                    }
+                                }
+                            }
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // create an array of bingo boards with all values set to 0 to track the status of the boards after a number has been picked
+    let numberWinTracker = [];
+    for (let i = 0; i < allBoards.length; i++) {
+        numberWinTracker.push([]);
+        for (let j = 0; j < 5; j++) {
+            numberWinTracker[i].push([]);
+            for (let k = 0; k < 5; k++) {
+                numberWinTracker[i][j].push(0);
+            }
+        }
+    }
+    // create an array to track which bingo boards have already won;
+    let boardWinTracker = [];
+    for (let i = 0; i < allBoards.length; i++) {
+        boardWinTracker.push(i);
+    }
+    // pick numbers from drawNumbers list and record the number that allows the final board to win
+    let unmarkedSum = 0;
+    let winningDraw;
+    let lastWinnerFound = false;
+    for (let z = 0; z < drawnNumbers.length; z++) {
+        winningDraw = drawnNumbers[z];
+        playGame(z);
+        if (lastWinnerFound) {
             break;
         }
     }
