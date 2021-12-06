@@ -1,6 +1,6 @@
 "use strict";
 let fileSystem = require('fs');
-let inputFile = fileSystem.readFileSync("../temp-input.txt", "utf-8");
+let inputFile = fileSystem.readFileSync("../day-6-input.txt", "utf-8");
 const fishStates = inputFile.split(",");
 // ---------- Part 1 ----------
 (function () {
