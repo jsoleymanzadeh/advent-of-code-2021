@@ -7,7 +7,7 @@ let positionsInput = inputFile.split(",");
     let hPositions = [];
     positionsInput.forEach(function (element, index) {
         hPositions.push(Number(element));
-    })
+    });
     // sort array to make it easier to find the median
     hPositions.sort(function (a, b) {
         return a - b;
@@ -18,6 +18,31 @@ let positionsInput = inputFile.split(",");
     let totalGas = 0;
     hPositions.forEach(function (element) {
         totalGas += Math.abs(median - element);
+    });
+    console.log(totalGas);
+})();
+// ---------- Part 2 ----------
+(function () {
+    let hPositions = [];
+    positionsInput.forEach(function (element, index) {
+        hPositions.push(Number(element));
+    });
+    // find sum of all elements to find the mean
+    let positionsSum = 0;
+    hPositions.forEach(function (element) {
+        positionsSum += element;
+    });
+    // find the mean
+    let average = Math.floor(positionsSum / hPositions.length);
+    // find the distance of all elements to the mean, then add the distances to totalGas
+    let totalGas = 0;
+    hPositions.forEach(function (element) {
+        let gasForMovement = 0;
+        let distanceToMove = Math.abs(average - element);
+        for(let i = 1; i < distanceToMove + 1; i++) {
+            gasForMovement += i;
+        }
+        totalGas += gasForMovement;
     });
     console.log(totalGas);
 })();
